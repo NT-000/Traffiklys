@@ -43,8 +43,10 @@
 
     .buttonClass {
         display: flex;
-        height: 50px;
-        width: 50px;
+        height: 60px;
+        width: 150px;
+        gap: 40px;
+        justify-self: center;
     }
 
 </style>
@@ -57,31 +59,38 @@
     </div>
 
     <div class="buttonClass">
-        <button id="redLight" onclick="showRed()">Red</button>
+        <!-- <button id="redLight" onclick="showRed()">Red</button>
         <button id="redYellowLight" onclick="showRedYellow()">Red/Yellow</button>
-        <button id="greenLight" onclick="showGreen()">Green</button>
+        <button id="greenLight" onclick="showGreen()">Green</button> -->
+        <button onclick="startNow()">Start</button>
+        <button onclick="stopCycle()">Stop</button>
     </div>
 
 <script>
-    const myTimer = setInterval(change, 2000);
+
     let firstLight = document.getElementById('firstLight');
     let secondLight = document.getElementById('secondLight');
     let thirdLight = document.getElementById('thirdLight');
     let trafficLight = document.getElementsByClassName('trafficLight');
+    let myTimer;
 
-    function change() {
-        showRed();
-        showRedYellow();
-        showGreen();
-        showYellow();
-        clearInterval();
-    }
+     function startNow() {
+         change();
+         myTimer = setInterval(change,5000);
+     }
+
+     function change() {
+         showRed();
+         setTimeout(showRedYellow,2000);
+         setTimeout(showGreen,3000);
+         setTimeout(showYellow,4000);
+     }
 
     function showRed() {
         firstLight.style.backgroundColor = "red";
         secondLight.style.backgroundColor = "gray";
         thirdLight.style.backgroundColor = "gray";
-        myTimer;
+       // setInterval(showRedYellow,1000);
 
     }
 
@@ -89,22 +98,41 @@
         firstLight.style.backgroundColor = "gray";
         secondLight.style.backgroundColor = "yellow";
         thirdLight.style.backgroundColor = "gray";
-        myTimer;
+        //setInterval(showRed, 1000);
     }
 
     function showRedYellow() {
         firstLight.style.backgroundColor = "red";
         secondLight.style.backgroundColor = "yellow";
         thirdLight.style.backgroundColor = "gray";
-        myTimer;
+        //setInterval(showGreen, 1000);
     }
 
     function showGreen() {
         firstLight.style.backgroundColor = "gray";
         secondLight.style.backgroundColor = "gray";
         thirdLight.style.backgroundColor = "green";
-        myTimer;
+       // setInterval(showYellow, 1000);
     }
+
+    function blank() {
+    firstLight.style.backgroundColor = "gray";
+    secondLight.style.backgroundColor = "gray";
+    thirdLight.style.backgroundColor = "gray";
+    blank2();
+    }
+
+    function blank2() {
+    firstLight.style.backgroundColor = "gray";
+    secondLight.style.backgroundColor = "gray";
+    thirdLight.style.backgroundColor = "gray";
+    }
+
+   function stopCycle() {
+
+    clearInterval(myTimer);
+    blank();
+}
 
 </script>
 </body>
